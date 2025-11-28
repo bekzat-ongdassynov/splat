@@ -43,7 +43,27 @@ public class Executor {
 	}
 	
 	private void setMaps() {
-		// TODO: Use setMaps() from SemanticAnalyzer as a guide
+		funcMap = new java.util.HashMap<>();
+		progVarMap = new java.util.HashMap<>();
+		
+		for (splat.parser.elements.Declaration decl : progAST.getDecls()) {
+			String label = decl.getLabel();
+			// add func to map
+			if (decl instanceof FunctionDecl) {
+				funcMap.put(label, (FunctionDecl)decl);
+			} else if (decl instanceof splat.parser.elements.VariableDecl) {
+				splat.parser.elements.VariableDecl varDecl = (splat.parser.elements.VariableDecl)decl;
+				String type = varDecl.getType();
+				// init vars with default values based on type
+				if (type.equals("Integer")) {
+					progVarMap.put(label, new IntegerValue(0));
+				} else if (type.equals("Boolean")) {
+					progVarMap.put(label, new BooleanValue(false));
+				} else if (type.equals("String")) {
+					progVarMap.put(label, new StringValue(""));
+				}
+			}
+		}
 	}
 
 }

@@ -1,10 +1,16 @@
 package splat.parser.elements;
 
 import splat.lexer.Token;
-
+// base for func and var decls
 public abstract class Declaration extends ASTElement {
+	private String label;
 
-	public Declaration(Token tok) {
+	public Declaration(String label, Token tok) {
 		super(tok);
+		this.label = label;
+	}
+	// name of func or var
+	public String getLabel() {
+		return label;
 	}
 }

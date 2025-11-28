@@ -5,6 +5,10 @@ import java.util.List;
 
 import splat.lexer.Lexer;
 import splat.lexer.Token;
+import splat.parser.Parser;
+import splat.parser.elements.ProgramAST;
+import splat.semanticanalyzer.SemanticAnalyzer;
+import splat.executor.Executor;
 
 public class Splat {
 
@@ -21,16 +25,16 @@ public class Splat {
 		List<Token> tokens = lexer.tokenize();
 		
 		// Step 2.  Parse
-		// Parser parser = new Parser(tokens);
-		// ProgramAST progAST = parser.parse();
+		Parser parser = new Parser(tokens);
+		ProgramAST progAST = parser.parse();
 		
 		// Step 3.  Semantic Analysis
-		// SemanticAnalyzer analyzer = new SemanticAnalyzer(progAST);
-		// analyzer.analyze();
+		SemanticAnalyzer analyzer = new SemanticAnalyzer(progAST);
+		analyzer.analyze();
 		
 		// Step 4.  Executor
-		// Executor executor = new Executor(progAST);
-		// executor.runProgram();
+		Executor executor = new Executor(progAST);
+		executor.runProgram();
 		
 		// THE END!
 	}
